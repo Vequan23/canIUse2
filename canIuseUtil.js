@@ -1,8 +1,11 @@
 import features from './features.js';
 
-const canIuseUtil = (options = {}) => {
+const canIuseUtil = (wrapperEl, options = {}) => {
+
     const defaults = {
-        resultsEl: document.querySelector('.results'),
+        resultsEl: wrapperEl.querySelector('.results'),
+        buttonEl: wrapperEl.querySelector('button'),
+        inputEl: wrapperEl.querySelector('input'),
         features: features,
         flexboxMessage: 'Yes, you golden god',
         noSupportMessage: 'No Support Boss',
@@ -23,17 +26,16 @@ const canIuseUtil = (options = {}) => {
     const handleClick = e => {
         const submittedFeature = settings.inputEl.value.toLowerCase();
         e.preventDefault();
-        if (submittedFeature === 'flexbox') {
-            settings.resultsEl.textContent = settings.flexboxMessage;
-        } else {
-            checkIfFeatureExists(submittedFeature);
-        }
+        checkIfFeatureExists(submittedFeature);
     };
 
     const checkIfFeatureExists = submittedFeature => {
         const featureFound = settings.features.includes(submittedFeature);
 
-        if (featureFound && settings.version === 'optimistic') {
+        if (submittedFeature === 'flexbox') {
+            settings.resultsEl.textContent = settings.flexboxMessage;
+        }
+        else if (featureFound && settings.version === 'optimistic') {
             settings.resultsEl.textContent = settings.fullSupportMessage;
         } else if (featureFound && settings.version === 'pessimistic') {
             settings.resultsEl.textContent = settings.noSupportMessage;
