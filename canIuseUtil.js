@@ -1,9 +1,13 @@
-import features from './features.js'
+import features from './features.js';
 
 const canIuseUtil = (options = {}) => {
     const defaults = {
         resultsEl: document.querySelector('.results'),
-        features: features
+        features: features,
+        flexboxMessage: 'Yes, you golden god',
+        noSupportMessage: 'No Support Boss',
+        fullSupportMessage: 'Full Support Boss',
+        featureNotFoundMessage: 'Feature not found'
     };
 
     const settings = { ...defaults, ...options };
@@ -20,7 +24,7 @@ const canIuseUtil = (options = {}) => {
         const submittedFeature = settings.inputEl.value.toLowerCase();
         e.preventDefault();
         if (submittedFeature === 'flexbox') {
-            settings.resultsEl.textContent = 'Yes, you golden god';
+            settings.resultsEl.textContent = settings.flexboxMessage;
         } else {
             checkIfFeatureExists(submittedFeature);
         }
@@ -30,11 +34,11 @@ const canIuseUtil = (options = {}) => {
         const featureFound = settings.features.includes(submittedFeature);
 
         if (featureFound && settings.version === 'optimistic') {
-            settings.resultsEl.textContent = 'Full Support Boss';
+            settings.resultsEl.textContent = settings.fullSupportMessage;
         } else if (featureFound && settings.version === 'pessimistic') {
-            settings.resultsEl.textContent = 'No Support Boss';
+            settings.resultsEl.textContent = settings.noSupportMessage;
         } else {
-            settings.resultsEl.textContent = 'Feature not found';
+            settings.resultsEl.textContent = settings.featureNotFoundMessage;
         }
     };
     init();
