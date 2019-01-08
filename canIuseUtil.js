@@ -4,12 +4,12 @@ const canIuseUtil = (wrapperEl, options = {}) => {
 
     const defaults = {
         resultsEl: wrapperEl.querySelector('.results'),
-        buttonEl: wrapperEl.querySelector('button'),
-        inputEl: wrapperEl.querySelector('input'),
-        features: features,
-        flexboxMessage: 'Yes, you golden god',
-        noSupportMessage: 'No Support Boss',
-        fullSupportMessage: 'Full Support Boss',
+        buttonEl: wrapperEl.querySelector('.js-search-button'),
+        inputEl: wrapperEl.querySelector('.js-input'),
+        formEl: wrapperEl.querySelector('.form'),
+        features,
+        goldenFeature: 'flexbox',
+        goldenFeatureMessage: 'Yes, you golden god',
         featureNotFoundMessage: 'Feature not found'
     };
 
@@ -31,14 +31,13 @@ const canIuseUtil = (wrapperEl, options = {}) => {
 
     const checkIfFeatureExists = submittedFeature => {
         const featureFound = settings.features.includes(submittedFeature);
+        const message = settings.formEl.getAttribute('data-message')
 
-        if (submittedFeature === 'flexbox') {
-            settings.resultsEl.textContent = settings.flexboxMessage;
+        if (submittedFeature === settings.goldenFeature) {
+            settings.resultsEl.textContent = settings.goldenFeatureMessage;
         }
-        else if (featureFound && settings.version === 'optimistic') {
-            settings.resultsEl.textContent = settings.fullSupportMessage;
-        } else if (featureFound && settings.version === 'pessimistic') {
-            settings.resultsEl.textContent = settings.noSupportMessage;
+        else if (featureFound) {
+            settings.resultsEl.textContent = message;
         } else {
             settings.resultsEl.textContent = settings.featureNotFoundMessage;
         }
