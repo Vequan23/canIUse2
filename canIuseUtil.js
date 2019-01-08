@@ -1,7 +1,6 @@
 import features from './features.js';
 
 const canIuseUtil = (wrapperEl, options = {}) => {
-
     const defaults = {
         resultsEl: wrapperEl.querySelector('.results'),
         buttonEl: wrapperEl.querySelector('.js-search-button'),
@@ -31,12 +30,11 @@ const canIuseUtil = (wrapperEl, options = {}) => {
 
     const checkIfFeatureExists = submittedFeature => {
         const featureFound = settings.features.includes(submittedFeature);
-        const message = settings.formEl.getAttribute('data-message')
+        const message = settings.formEl.getAttribute('data-message');
 
         if (submittedFeature === settings.goldenFeature) {
             settings.resultsEl.textContent = settings.goldenFeatureMessage;
-        }
-        else if (featureFound) {
+        } else if (featureFound) {
             settings.resultsEl.textContent = message;
         } else {
             settings.resultsEl.textContent = settings.featureNotFoundMessage;
