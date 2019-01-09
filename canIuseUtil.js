@@ -1,4 +1,3 @@
-import features from './features.js';
 
 const canIuseUtil = (wrapperEl, options = {}) => {
     const defaults = {
@@ -6,7 +5,7 @@ const canIuseUtil = (wrapperEl, options = {}) => {
         buttonEl: wrapperEl.querySelector('.js-search-button'),
         inputEl: wrapperEl.querySelector('.js-input'),
         formEl: wrapperEl.querySelector('.form'),
-        features,
+        features: null,
         goldenFeature: 'flexbox',
         goldenFeatureMessage: 'Yes, you golden god',
         featureNotFoundMessage: 'Feature not found'
